@@ -12,7 +12,7 @@ public class Tile extends BoardObject{
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.white);
-		g.drawOval((int) x,(int) y, 100, 100);
+		g.drawOval((int) x,(int) y, 150, 150);
 		
 	}
 
