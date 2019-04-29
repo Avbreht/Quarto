@@ -2,14 +2,15 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Tile extends BoardObject{
+public class Tile {
+	
+	protected int x, y; 
 
-	public Tile(float x, float y, ID id) {
-		super(x, y, id);
-		// TODO Auto-generated constructor stub
+	public Tile(int x, int y) {
+		this.x = x; 
+		this.y = y; 
 	}
 
-	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.white);
 		g.drawOval((int) x,(int) y, 150, 150);

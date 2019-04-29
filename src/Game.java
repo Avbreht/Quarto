@@ -13,9 +13,12 @@ public class Game extends Canvas implements Runnable{
 
 	public static final int width = 1600; 
 	public static final int height = 1000; 
+	
 	private Thread thread; 
 	private boolean running = false; 
-	private ObjectList oList; 
+	
+//	private TileArray tilesA;
+	private TileArray tiles; 
 	
 	public enum state{
 		Choice, 
@@ -25,29 +28,44 @@ public class Game extends Canvas implements Runnable{
 	
 	public Game() {
 		
-		// initialize he board objects:
-		oList = new ObjectList();
+		tiles = new TileArray();
 		
-		// initialize the game window:
 		new Window (width, height, "Quarto", this);
 		
-		// initialize tiles: 
-		oList.add(new Tile(475, 770, ID.Tile));
-		oList.add(new Tile(595, 650, ID.Tile));
-		oList.add(new Tile(355, 650, ID.Tile));
-		oList.add(new Tile(475, 530, ID.Tile));
-		oList.add(new Tile(715, 530, ID.Tile));
-		oList.add(new Tile(835, 410, ID.Tile));
-		oList.add(new Tile(115, 410, ID.Tile));
-		oList.add(new Tile(235, 530, ID.Tile));
-		oList.add(new Tile(715, 290, ID.Tile));
-		oList.add(new Tile(235, 290, ID.Tile));
-		oList.add(new Tile(595, 410, ID.Tile));
-		oList.add(new Tile(355, 410, ID.Tile));
-		oList.add(new Tile(475, 290, ID.Tile));
-		oList.add(new Tile(595, 170, ID.Tile));
-		oList.add(new Tile(355, 170, ID.Tile));
-		oList.add(new Tile(475, 50, ID.Tile));
+		tiles.addTile(0, 0, new Tile(475, 50));
+		tiles.addTile(0, 1, new Tile(595, 170));
+		tiles.addTile(0, 2, new Tile(715, 290));
+		tiles.addTile(0, 3, new Tile(835, 410));
+		tiles.addTile(1, 0, new Tile(355, 170));
+		tiles.addTile(1, 1, new Tile(475, 290));
+		tiles.addTile(1, 2, new Tile(595, 410));
+		tiles.addTile(1, 3, new Tile(715, 530));
+		tiles.addTile(2, 0, new Tile(235, 290));
+		tiles.addTile(2, 1, new Tile(355, 410));
+		tiles.addTile(2, 2, new Tile(475, 530));
+		tiles.addTile(2, 3, new Tile(595, 650));
+		tiles.addTile(3, 0, new Tile(115, 410));
+		tiles.addTile(3, 1, new Tile(235, 530));
+		tiles.addTile(3, 2, new Tile(355, 650));
+		tiles.addTile(3, 3, new Tile(475, 770));
+		
+		// if we choose to use TileList:
+	//	tiles.add(new Tile(475, 770)); 
+	//	tiles.add(new Tile(595, 650));
+	//	tiles.add(new Tile(355, 650));
+	//	tiles.add(new Tile(475, 530));
+	//	tiles.add(new Tile(715, 530));
+	//	tiles.add(new Tile(835, 410));
+	//	tiles.add(new Tile(115, 410));
+	//	tiles.add(new Tile(235, 530));
+	//	tiles.add(new Tile(715, 290));
+	//	tiles.add(new Tile(235, 290));
+	//	tiles.add(new Tile(595, 410));
+	//	tiles.add(new Tile(355, 410));
+	//	tiles.add(new Tile(475, 290));
+	//	tiles.add(new Tile(595, 170));
+	//	tiles.add(new Tile(355, 170));
+	//	tiles.add(new Tile(475, 50));
 		
 		
 	}
@@ -118,25 +136,26 @@ public class Game extends Canvas implements Runnable{
 		g.drawOval(110, 45, 880, 880);
 		g.drawLine(1100, 1000, 1100, 0);
 		
-		// tiles (for debugging):
-	//	g.drawOval(475, 770, 150, 150);
-	//	g.drawOval(595, 650, 150, 150);
-	//	g.drawOval(355, 650, 150, 150);
-	//	g.drawOval(475, 530, 150, 150);
-	//	g.drawOval(715, 530, 150, 150);
-	//	g.drawOval(835, 410, 150, 150);
-	//	g.drawOval(115, 410, 150, 150);
-	//	g.drawOval(235, 530, 150, 150);
-	//	g.drawOval(715, 290, 150, 150);
-	//	g.drawOval(235, 290, 150, 150);
-	//	g.drawOval(595, 410, 150, 150);
-	//	g.drawOval(355, 410, 150, 150);
-	//	g.drawOval(475, 290, 150, 150);
-	//	g.drawOval(595, 170, 150, 150);
-	//	g.drawOval(355, 170, 150, 150);
-	//	g.drawOval(475, 50, 150, 150);
+		// tiles (indexed)
+	//	g.drawOval(475, 50, 150, 150); g.drawString("1, 1", 515, 90);
+	//	g.drawOval(595, 170, 150, 150); g.drawString("1, 2", 635, 210);
+	//	g.drawOval(715, 290, 150, 150); g.drawString("1, 3", 745, 330);
+	//	g.drawOval(835, 410, 150, 150); g.drawString("1, 4", 875, 450);
+	//	g.drawOval(355, 170, 150, 150); g.drawString("2, 1", 395, 210);
+	//	g.drawOval(475, 290, 150, 150); g.drawString("2, 2", 515, 330);
+	//	g.drawOval(595, 410, 150, 150); g.drawString("2, 3", 635, 450);
+	//	g.drawOval(715, 530, 150, 150); g.drawString("2, 4", 755, 570);
+	//	g.drawOval(235, 290, 150, 150); g.drawString("3, 1", 275, 330);
+	//	g.drawOval(355, 410, 150, 150); g.drawString("3, 2", 395, 450);
+	//	g.drawOval(475, 530, 150, 150); g.drawString("3, 3", 515, 570);
+	//	g.drawOval(595, 650, 150, 150); g.drawString("3, 4", 635, 690);
+	//	g.drawOval(115, 410, 150, 150); g.drawString("4, 1", 155, 450);
+	//	g.drawOval(235, 530, 150, 150); g.drawString("4, 2", 275, 570);
+	//	g.drawOval(355, 650, 150, 150); g.drawString("4, 3", 395, 690);
+	//	g.drawOval(475, 770, 150, 150); g.drawString("4, 4", 515, 810);		
 		
-		oList.draw(g);
+		
+		tiles.draw(g);
 		
 		g.dispose();
 		bs.show();
