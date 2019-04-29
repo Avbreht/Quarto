@@ -5,14 +5,16 @@ import java.awt.Graphics;
 public class Tile {
 	
 	protected int x, y; 
-
-	public Tile(int x, int y) {
+	protected boolean state; 
+	
+	public Tile(int x, int y, Boolean state) {
 		this.x = x; 
 		this.y = y; 
+		this.state = state;
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(Color.white);
+		g.setColor(Color.yellow);
 		g.drawOval((int) x,(int) y, 150, 150);
 		
 	}

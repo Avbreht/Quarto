@@ -9,7 +9,7 @@ public class TileArray {
 			for (int j = 0; j < 4; j++) {
 				Tile tile = tiles[i][j]; 
 				tile.draw(g);
-				g.drawString("" + i + ", " + j, tile.x + 40, tile.y + 40);
+			  //g.drawString("" + i + ", " + j, tile.x + 40, tile.y + 40);
 			}
 		}
 	}
