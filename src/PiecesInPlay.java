@@ -2,7 +2,7 @@
 import java.awt.Graphics;
 import java.util.LinkedList;
 
-public class FreePieces {
+public class PiecesInPlay {
 	
 	public LinkedList<Piece> pieces = new LinkedList<Piece>();  
 
