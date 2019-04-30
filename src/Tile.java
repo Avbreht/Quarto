@@ -15,7 +15,7 @@ public class Tile {
 
 	public void draw(Graphics g) {
 		g.setColor(Color.yellow);
-		g.drawOval((int) x,(int) y, 150, 150);
+		g.drawOval(x, y, 150, 150);
 		
 	}
 

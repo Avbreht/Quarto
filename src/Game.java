@@ -40,6 +40,7 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 		
 		tiles = new TileArray();
+		freePieces = new FreePieces();
 		
 		new Window (width, height, "Quarto", this);
 		
@@ -61,25 +62,7 @@ public class Game extends Canvas implements Runnable{
 		tiles.addTile(3, 3, new Tile(A33x, A33y, false));
 		
 		
-		
-		// if we choose to use TileList:
-	//	tiles.add(new Tile(475, 770)); 
-	//	tiles.add(new Tile(595, 650));
-	//	tiles.add(new Tile(355, 650));
-	//	tiles.add(new Tile(475, 530));
-	//	tiles.add(new Tile(715, 530));
-	//	tiles.add(new Tile(835, 410));
-	//	tiles.add(new Tile(115, 410));
-	//	tiles.add(new Tile(235, 530));
-	//	tiles.add(new Tile(715, 290));
-	//	tiles.add(new Tile(235, 290));
-	//	tiles.add(new Tile(595, 410));
-	//	tiles.add(new Tile(355, 410));
-	//	tiles.add(new Tile(475, 290));
-	//	tiles.add(new Tile(595, 170));
-	//	tiles.add(new Tile(355, 170));
-	//	tiles.add(new Tile(475, 50));
-		
+		freePieces.addPiece(new Piece(A33x, A33y, true, true, false, true));
 		
 	}
 
@@ -147,26 +130,9 @@ public class Game extends Canvas implements Runnable{
 		
 		g.setColor(Color.yellow);
 		g.drawOval(110, 45, 880, 880);
-		g.drawLine(1100, 1000, 1100, 0);
+		g.drawLine(1100, 1000, 1100, 0);		
 		
-		// tiles (indexed)
-	//	g.drawOval(475, 50, 150, 150); g.drawString("1, 1", 515, 90);
-	//	g.drawOval(595, 170, 150, 150); g.drawString("1, 2", 635, 210);
-	//	g.drawOval(715, 290, 150, 150); g.drawString("1, 3", 745, 330);
-	//	g.drawOval(835, 410, 150, 150); g.drawString("1, 4", 875, 450);
-	//	g.drawOval(355, 170, 150, 150); g.drawString("2, 1", 395, 210);
-	//	g.drawOval(475, 290, 150, 150); g.drawString("2, 2", 515, 330);
-	//	g.drawOval(595, 410, 150, 150); g.drawString("2, 3", 635, 450);
-	//	g.drawOval(715, 530, 150, 150); g.drawString("2, 4", 755, 570);
-	//	g.drawOval(235, 290, 150, 150); g.drawString("3, 1", 275, 330);
-	//	g.drawOval(355, 410, 150, 150); g.drawString("3, 2", 395, 450);
-	//	g.drawOval(475, 530, 150, 150); g.drawString("3, 3", 515, 570);
-	//	g.drawOval(595, 650, 150, 150); g.drawString("3, 4", 635, 690);
-	//	g.drawOval(115, 410, 150, 150); g.drawString("4, 1", 155, 450);
-	//	g.drawOval(235, 530, 150, 150); g.drawString("4, 2", 275, 570);
-	//	g.drawOval(355, 650, 150, 150); g.drawString("4, 3", 395, 690);
-	//	g.drawOval(475, 770, 150, 150); g.drawString("4, 4", 515, 810);		
-		
+		//================================================
 		
 		g.setColor(Color.white);
 		
@@ -187,68 +153,58 @@ public class Game extends Canvas implements Runnable{
 		
 		
 		// free pieces:
-	//	g.fillRect(1120, 830, 100, 100);
-	//	g.fillRect(1240, 830, 100, 100);
-	//	g.setColor(boardColor);
-	//	g.fillOval(1265, 855, 50, 50);
+		g.fillRect(1120, 830, 100, 100);
+		g.fillRect(1240, 830, 100, 100);
+		g.setColor(boardColor);
+		g.fillOval(1265, 855, 50, 50);
 		
-	//	g.setColor(Color.black);
-	//	g.fillRect(1360, 830, 100, 100);
-	//	g.fillRect(1480, 830, 100, 100);
-	//	g.setColor(boardColor);
-	//	g.fillOval(1505, 855, 50, 50);
+		g.setColor(Color.black);
+		g.fillRect(1360, 830, 100, 100);
+		g.fillRect(1480, 830, 100, 100);
+		g.setColor(boardColor);
+		g.fillOval(1505, 855, 50, 50);
 		
-	//	g.setColor(Color.white);
-	//	g.fillOval(1120, 690, 100, 100);
-	//	g.fillOval(1240, 690, 100, 100);
-	//	g.setColor(boardColor);
-	//	g.fillOval(1265, 715, 50, 50);
+		g.setColor(Color.white);
+		g.fillOval(1120, 690, 100, 100);
+		g.fillOval(1240, 690, 100, 100);
+		g.setColor(boardColor);
+		g.fillOval(1265, 715, 50, 50);
 		
-	//	g.setColor(Color.black);
-	//	g.fillOval(1360, 690, 100, 100);
-	//	g.fillOval(1480, 690, 100, 100);
-	//	g.setColor(boardColor);
-	//	g.fillOval(1505, 715, 50, 50);
+		g.setColor(Color.black);
+		g.fillOval(1360, 690, 100, 100);
+		g.fillOval(1480, 690, 100, 100);
+		g.setColor(boardColor);
+		g.fillOval(1505, 715, 50, 50);
 		
-	//	g.setColor(Color.white);
-	//	g.fillRect(1135, 580, 70, 70);
-	//	g.fillRect(1255, 580, 70, 70);
-	//	g.setColor(boardColor);
-	//	g.fillOval(1275, 600, 30, 30);
+		g.setColor(Color.white);
+		g.fillRect(1135, 580, 70, 70);
+		g.fillRect(1255, 580, 70, 70);
+		g.setColor(boardColor);
+		g.fillOval(1275, 600, 30, 30);
 		
-	//	g.setColor(Color.black);
-	//	g.fillRect(1375, 580, 70, 70);
-	//	g.fillRect(1495, 580, 70, 70);
-	//	g.setColor(boardColor);
-	//	g.fillOval(1515, 600, 30, 30);
+		g.setColor(Color.black);
+		g.fillRect(1375, 580, 70, 70);
+		g.fillRect(1495, 580, 70, 70);
+		g.setColor(boardColor);
+		g.fillOval(1515, 600, 30, 30);
 		
-	//	g.setColor(Color.white);
-	//	g.fillOval(1135, 470, 70, 70);
-	//	g.fillOval(1255, 470, 70, 70);
-	//	g.setColor(boardColor);
-	//	g.fillOval(1275, 490, 30, 30);
+		g.setColor(Color.white);
+		g.fillOval(1135, 470, 70, 70);
+		g.fillOval(1255, 470, 70, 70);
+		g.setColor(boardColor);
+		g.fillOval(1275, 490, 30, 30);
 		
-	//	g.setColor(Color.black);
-	//	g.fillOval(1375, 470, 70, 70);
-	//	g.fillOval(1495, 470, 70, 70);
-	//	g.setColor(boardColor);
-	//	g.fillOval(1515, 490, 30, 30);
-		
-		
-
-
-		
-		
-		
-		
-		
-		
+		g.setColor(Color.black);
+		g.fillOval(1375, 470, 70, 70);
+		g.fillOval(1495, 470, 70, 70);
+		g.setColor(boardColor);
+		g.fillOval(1515, 490, 30, 30);
 		
 		
 		
 		
 		tiles.draw(g);
-	//	freePieces.draw(g);
+		freePieces.draw(g);
 		
 		
 		

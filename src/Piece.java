@@ -8,6 +8,7 @@ public class Piece {
 	protected boolean shape; // false = square, true = round; 
 	protected boolean loop;  // false = doesn't have a loop, true = has a loop; 
 	protected int x, y; 
+	
 	Game game; 
 	
 	public Piece (int x, int y, boolean size, boolean color, 
@@ -35,13 +36,15 @@ public class Piece {
 		this.y = y;
 	}
 	
-	// for the board: 
-	public void draw (Graphics g) {
+	
+	
+	public void draw(Graphics g) {
 		
 		if (color == false) g.setColor(Color.black);
 		else if (color == true) g.setColor(Color.white);
+		g.fillRect(x+25, y+25, 100, 100);
 		
-		// no loop:
+	/*	// no loop:
 		if (size == false && shape == false && loop == false) {
 			g.fillRect(this.x + 40, this.y + 40, 70, 70);
 		}
@@ -56,7 +59,7 @@ public class Piece {
 		}
 		
 		// with loop:
-		if (size == false && shape == false && loop == true) {
+		else if (size == false && shape == false && loop == true) {
 			g.fillRect(this.x + 40, this.y + 40, 70, 70);
 			g.setColor(game.getBoardColor());
 			g.drawOval(this.x + 60, this.y + 60, 30, 30);
@@ -76,8 +79,8 @@ public class Piece {
 			g.setColor(game.getBoardColor());
 			g.drawOval(this.x + 50, this.y + 50, 50, 50);
 		
-		}
-	}
+		} */
+	} 
 }
 
 
