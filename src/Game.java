@@ -27,7 +27,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private static final Color boardColor = new Color(100, 30, 0);
 	
-	public enum state{
+	public enum STATE{
 		Choice, 
 		Placement, 
 		End; 
@@ -62,7 +62,9 @@ public class Game extends Canvas implements Runnable{
 		tiles.addTile(3, 3, new Tile(A33x, A33y, false));
 		
 		
-		freePieces.addPiece(new Piece(A33x, A33y, true, true, false, true));
+		freePieces.addPiece(new Piece(A33x, A33y, Piece.SIZE.big, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.without));
+		freePieces.addPiece(new Piece(A22x, A22y, Piece.SIZE.big, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.without));
+		freePieces.addPiece(new Piece(A23x, A23y, Piece.SIZE.small, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.with));
 		
 	}
 

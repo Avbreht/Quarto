@@ -3,16 +3,33 @@ import java.awt.Graphics;
 
 public class Piece {
 
-	protected boolean size; // false = short, true = big; 
-	protected boolean color; // false = black, true = white; 
-	protected boolean shape; // false = square, true = round; 
-	protected boolean loop;  // false = doesn't have a loop, true = has a loop; 
+	public enum SIZE {
+		big, 
+		small; 
+	}
+	public enum COLOR {
+		white, 
+		black; 
+	}
+	public enum SHAPE {
+		circle, 
+		square;
+	}
+	public enum LOOP {
+		with,
+		without; 
+	}
+	
 	protected int x, y; 
+	protected SIZE size; 
+	protected COLOR color;
+	protected SHAPE shape; 
+	protected LOOP loop; 
 	
 	Game game; 
 	
-	public Piece (int x, int y, boolean size, boolean color, 
-			boolean shape, boolean loop) {
+	public Piece (int x, int y, SIZE size, COLOR color, 
+			SHAPE shape, LOOP loop) {
 		this.x = x; 
 		this.y = y;
 		this.size = size; 
@@ -40,8 +57,8 @@ public class Piece {
 	
 	public void draw(Graphics g) {
 		
-		if (color == false) g.setColor(Color.black);
-		else if (color == true) g.setColor(Color.white);
+		if (color == COLOR.black) g.setColor(Color.black);
+		else if (color == COLOR.white) g.setColor(Color.white);
 		g.fillRect(x+25, y+25, 100, 100);
 		
 	/*	// no loop:
