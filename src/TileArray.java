@@ -2,7 +2,7 @@ import java.awt.Graphics;
 
 public class TileArray {
 
-	public Tile[][] tiles = new Tile[4][4];	
+	private Tile[][] tiles = new Tile[4][4];	
 	
 	public void draw(Graphics g) {
 		for (int i = 0; i < 4; i++) {

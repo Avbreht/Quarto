@@ -38,6 +38,14 @@ public class Piece {
 		this.loop = loop; 
 	}
 	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
 	public void setX(int x) {
 		this.x = x;
 	}
@@ -45,7 +53,6 @@ public class Piece {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
 	
 		// (big, square) = g.drawRect(Aijx + 25, Aijy + 25, 100, 100)
 		// (big, round) = g.drawOval(Aijx + 25, Aijy + 25, 100, 100)

@@ -1,6 +1,7 @@
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable{
@@ -16,6 +17,8 @@ public class Game extends Canvas implements Runnable{
 	private TileArray tiles; 
 	private FreePieces freePieces; 
 	private PiecesInPlay piecesInPlay;
+	private Platform platform;
+//	private MouseInput mouse; 
 	
 	// tile coordinates:
 	private int A00x = 475, A00y = 50,  A01x = 595, A01y = 170, A02x = 715, A02y = 290, A03x = 835, A03y = 410;
@@ -24,8 +27,8 @@ public class Game extends Canvas implements Runnable{
 	private int A30x = 115, A30y = 410, A31x = 235, A31y = 530, A32x = 355, A32y = 650, A33x = 475, A33y = 770;
 	
 	// free pieces coordinates:
-	private int c1 = 805, c2 = 665, c3 = 540, c4 = 430;
-	private int r1 = 1095, r2 = 1215, r3 = 1335, r4 = 1455; 
+	public int c1 = 805, c2 = 665, c3 = 540, c4 = 430;
+	public int r1 = 1095, r2 = 1215, r3 = 1335, r4 = 1455; 
 	
 	// background:
 	private final Color boardColor = new Color(100, 30, 0);
@@ -35,11 +38,11 @@ public class Game extends Canvas implements Runnable{
 		P2_Choose,
 		P1_Placement,
 		P2_Placement,
-		End; 
+		P1_Wins,
+		P2_Wins; 
 	}
 	
 	public Color getBoardColor () {
-		// why doesn't this work in Piece.draw() ????
  		return this.boardColor; 
 	}
 	
@@ -47,10 +50,14 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 		
 		tiles = new TileArray();
-		freePieces = new FreePieces();
+		platform = new Platform(); 
+		freePieces = new FreePieces(platform);
 		piecesInPlay = new PiecesInPlay();
 		
 		new Window (width, height, "Quarto", this);
+		
+	//	mouse = new MouseInput();
+		this.addMouseListener(new MouseInput(freePieces)); 
 		
 		// Initial state of the tiles:
 		tiles.addTile(0, 0, new Tile(A00x, A00y, false));
@@ -87,6 +94,7 @@ public class Game extends Canvas implements Runnable{
 		freePieces.addPiece(new Piece(r2, c4, Piece.SIZE.small, Piece.COLOR.white, Piece.SHAPE.circle, Piece.LOOP.with));
 		freePieces.addPiece(new Piece(r3, c4, Piece.SIZE.small, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.without));
 		freePieces.addPiece(new Piece(r4, c4, Piece.SIZE.small, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.with));
+		
 	}
 
 	public synchronized void start() {
@@ -117,7 +125,7 @@ public class Game extends Canvas implements Runnable{
 				delta += (now - lastTime) / ns; 
 				lastTime = now; 
 				while(delta >= 1) {
-					init(); 
+					tick(); 
 					delta--; 
 				}
 				if(running)
@@ -126,8 +134,8 @@ public class Game extends Canvas implements Runnable{
 			stop(); 
 		}
 
-	private void init() {
-		
+	private void tick() {
+	//	freePieces.tick();
 	}
 		
 	private void draw() {
@@ -147,10 +155,15 @@ public class Game extends Canvas implements Runnable{
 		g.drawLine(1100, 1000, 1100, 0);		
 		//Draw the tiles:
 		tiles.draw(g);
+		// Draw the piece to be placed: 
+		platform.draw(g);
 		// Draw the free pieces:
 		freePieces.draw(g);
 		// Draw the pieces in play:
 		piecesInPlay.draw(g);
+		
+		g.setColor(Color.white);
+		g.drawRect(1300, 200, 100, 100);
 		
 		g.dispose();
 		bs.show();
