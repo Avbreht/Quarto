@@ -46,36 +46,37 @@ public class Game extends Canvas implements Runnable{
  		return this.boardColor; 
 	}
 	
+	public static STATE gameState = STATE.P1_Choose;
 	
 	public Game() {
 		
-		tiles = new TileArray();
 		platform = new Platform(); 
-		freePieces = new FreePieces(platform);
 		piecesInPlay = new PiecesInPlay();
+		tiles = new TileArray(platform);
+		freePieces = new FreePieces(platform);
 		
 		new Window (width, height, "Quarto", this);
 		
 	//	mouse = new MouseInput();
-		this.addMouseListener(new MouseInput(freePieces)); 
+		this.addMouseListener(new MouseInput(freePieces, platform, tiles)); 
 		
 		// Initial state of the tiles:
-		tiles.addTile(0, 0, new Tile(A00x, A00y, false));
-		tiles.addTile(0, 1, new Tile(A01x, A01y, false));
-		tiles.addTile(0, 2, new Tile(A02x, A02y, false));
-		tiles.addTile(0, 3, new Tile(A03x, A03y, false));
-		tiles.addTile(1, 0, new Tile(A10x, A10y, false));
-		tiles.addTile(1, 1, new Tile(A11x, A11y, false));
-		tiles.addTile(1, 2, new Tile(A12x, A12y, false));
-		tiles.addTile(1, 3, new Tile(A13x, A13y, false));
-		tiles.addTile(2, 0, new Tile(A20x, A20y, false));
-		tiles.addTile(2, 1, new Tile(A21x, A21y, false));
-		tiles.addTile(2, 2, new Tile(A22x, A22y, false));
-		tiles.addTile(2, 3, new Tile(A23x, A23y, false));
-		tiles.addTile(3, 0, new Tile(A30x, A30y, false));
-		tiles.addTile(3, 1, new Tile(A31x, A31y, false));
-		tiles.addTile(3, 2, new Tile(A32x, A32y, false));
-		tiles.addTile(3, 3, new Tile(A33x, A33y, false));
+		tiles.addTile(0, 0, new Tile(A00x, A00y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(0, 1, new Tile(A01x, A01y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(0, 2, new Tile(A02x, A02y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(0, 3, new Tile(A03x, A03y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(1, 0, new Tile(A10x, A10y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(1, 1, new Tile(A11x, A11y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(1, 2, new Tile(A12x, A12y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(1, 3, new Tile(A13x, A13y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(2, 0, new Tile(A20x, A20y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(2, 1, new Tile(A21x, A21y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(2, 2, new Tile(A22x, A22y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(2, 3, new Tile(A23x, A23y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(3, 0, new Tile(A30x, A30y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(3, 1, new Tile(A31x, A31y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(3, 2, new Tile(A32x, A32y, Tile.STATE.empty, platform, piecesInPlay));
+		tiles.addTile(3, 3, new Tile(A33x, A33y, Tile.STATE.empty, platform, piecesInPlay));
 		
 		// Initial state of the game pieces:
 		freePieces.addPiece(new Piece(r1, c1, Piece.SIZE.big, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.without));
@@ -161,9 +162,6 @@ public class Game extends Canvas implements Runnable{
 		freePieces.draw(g);
 		// Draw the pieces in play:
 		piecesInPlay.draw(g);
-		
-		g.setColor(Color.white);
-		g.drawRect(1300, 200, 100, 100);
 		
 		g.dispose();
 		bs.show();

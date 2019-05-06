@@ -3,6 +3,11 @@ import java.awt.Graphics;
 public class TileArray {
 
 	private Tile[][] tiles = new Tile[4][4];	
+	private Platform platform;
+	
+	public TileArray (Platform platform) {
+		this.platform = platform;
+	}
 	
 	public void draw(Graphics g) {
 		for (int i = 0; i < 4; i++) {
@@ -17,4 +22,22 @@ public class TileArray {
 	public void addTile(int i, int j, Tile tile) {
 		this.tiles[i][j] = tile;
 	}
+	
+	public void addOnClick (int mx, int my) {
+
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				Tile tile = tiles[i][j]; 
+				int tx = tile.getX();
+				int ty = tile.getY();
+				if (MouseInput.inBounds(mx, my, tx, ty, 150, 150)) {
+					 tile.place();
+					 if (Game.gameState == Game.STATE.P1_Placement) Game.gameState = Game.STATE.P1_Choose;
+					 else if (Game.gameState == Game.STATE.P2_Placement) Game.gameState = Game.STATE.P2_Choose;
+				 }
+			}
+		}
+		platform.clear();
+	}   
+	
 }

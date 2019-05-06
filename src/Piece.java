@@ -104,6 +104,11 @@ public class Piece {
 		
 		} 
 	} 
+	
+	public static int pieceLength (Piece p) {
+		if (p.size == Piece.SIZE.big) return 100;
+		else return 70;
+	}
 }
 
 

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class FreePieces {
 	
-	LinkedList<Piece> pieces = new LinkedList<Piece>(); 
+	LinkedList<Piece> pieces = new LinkedList<Piece>();
 	private Platform platform; 
 	
 	public FreePieces(Platform platform) {
@@ -37,45 +37,31 @@ public class FreePieces {
 		}
 	}  */
 	
-	public boolean inBounds(int x, int y, int px, int py, int xLen, int yLen) {
-		
-		if (x > px && x < px + xLen) {
-			if (y > py && y < py + yLen) {
-				return true; 
-			}
-			else return false; 
-		}
-		else return false; 
-	}
-	
 	public int coordError (Piece p) {
 		if (p.size == Piece.SIZE.big) return 25;
 		else return 40;
 		
 	}
 	
-	public int lenError (Piece p) {
-		if (p.size == Piece.SIZE.big) return 100;
-		else return 70;
-	}
-	
 	public void removeOnClick (int mx, int my) {
-		LinkedList<Piece> auxiliary = new LinkedList<Piece>(); 
-		 for (Piece piece : pieces) {
-			 int px = piece.getX();
-			 int py = piece.getY();
-			 int ce = coordError(piece);
-			 int le = lenError(piece);
-			 if (inBounds(mx, my, px + ce, py + ce, le, le)) {
-				 piece.setX(1275);
-				 piece.setY(175);
-				 platform.addPiece(piece);
-			 }
-			 else auxiliary.add(piece);
-		 }
-		 
-		 this.pieces = auxiliary; 
-	 }
+		
+			LinkedList<Piece> auxiliary = new LinkedList<Piece>(); 
+			for (Piece piece : pieces) {
+				int px = piece.getX();
+				int py = piece.getY();
+				int ce = coordError(piece);
+				int pl = Piece.pieceLength(piece);
+				if (MouseInput.inBounds(mx, my, px + ce, py + ce, pl, pl)) {
+					piece.setX(1275);
+					piece.setY(175);
+					platform.addPiece(piece);
+					if (Game.gameState == Game.STATE.P1_Choose) Game.gameState = Game.STATE.P2_Placement;
+					else if (Game.gameState == Game.STATE.P2_Choose) Game.gameState = Game.STATE.P1_Placement;
+				}
+				else auxiliary.add(piece);
+			}
+			this.pieces = auxiliary; 	
+	}
 }
 
 

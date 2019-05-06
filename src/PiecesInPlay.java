@@ -5,6 +5,14 @@ import java.util.LinkedList;
 public class PiecesInPlay {
 	
 	public LinkedList<Piece> pieces = new LinkedList<Piece>();  
+	private Platform platform;
+	private TileArray tiles; 
+	
+//	public PiecesInPlay(Platform platform, TileArray tiles) {
+//		this.platform = platform; 
+//		this.tiles = tiles; 
+//		
+//	}
 
 	public void draw(Graphics g) {
 		for (Piece piece : pieces) {
@@ -17,6 +25,8 @@ public class PiecesInPlay {
 	}
 	
 	public void removePiece(Piece piece) {
-		this.pieces.remove(piece); 
+		this.pieces.remove(piece);
 	}
+	
+
 }
