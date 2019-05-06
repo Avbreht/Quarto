@@ -6,7 +6,7 @@ public class Tile {
 	
 	public enum STATE {
 		empty,
-		takem;
+		taken;
 	}
 	
 	protected int x, y; 
@@ -45,8 +45,21 @@ public class Tile {
 		beingPlayed.setX(this.getX()); 
 		beingPlayed.setY(this.getY());
 		piecesInPlay.addPiece(beingPlayed);
+		this.state = STATE.taken;
 	} 
 
+	
+	/* Change the constructor of the tile so that it also has an initially empty list
+	 * in which the piece placed on the tile is added.
+	 * Then make a method to get the piece saved in that list.
+	 * Add the piece in the list with the place() method.
+	 * In the TileArray class make the draw() method also look at the 
+	 * individual lists of the tiles.
+	 * If it contains a game piece the method should also draw the piece.
+	 * With this the PiecesInPlay class could become redundant */
+	
+	
+	
 }
 
 

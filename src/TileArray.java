@@ -30,14 +30,50 @@ public class TileArray {
 				Tile tile = tiles[i][j]; 
 				int tx = tile.getX();
 				int ty = tile.getY();
-				if (MouseInput.inBounds(mx, my, tx, ty, 150, 150)) {
+				if (MouseInput.inBounds(mx, my, tx, ty, 150, 150) && (tile.state == Tile.STATE.empty)) {
 					 tile.place();
+					 platform.clear();
 					 if (Game.gameState == Game.STATE.P1_Placement) Game.gameState = Game.STATE.P1_Choose;
 					 else if (Game.gameState == Game.STATE.P2_Placement) Game.gameState = Game.STATE.P2_Choose;
+					 
 				 }
 			}
 		}
-		platform.clear();
 	}   
-	
+
+/*	public void tick() {
+		for (int i = 0; i < 4; i++) {
+			Tile tile1 = tiles[i][1];
+			Tile tile2 = tiles[i][2];
+			Tile tile3 = tiles[i][3];
+			Tile tile4 = tiles[i][4];
+			
+		}
+	}   */
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

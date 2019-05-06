@@ -30,7 +30,7 @@ public class MouseInput extends MouseAdapter {
 	public void mouseClicked (MouseEvent e) {		
 		int mouseX = e.getX();
 		int mouseY = e.getY(); 
-		System.out.println("X :" + mouseX + " Y: " + mouseY); 
+	//	System.out.println("X :" + mouseX + " Y: " + mouseY); 
 		if ((Game.gameState == Game.STATE.P1_Choose || Game.gameState == Game.STATE.P2_Choose)
 				&& !platform.ready()) freePieces.removeOnClick(mouseX, mouseY);
 		else if ((Game.gameState == Game.STATE.P1_Placement || Game.gameState == Game.STATE.P2_Placement)

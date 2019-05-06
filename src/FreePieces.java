@@ -11,10 +11,6 @@ public class FreePieces {
 		this.platform = platform;
 	}
 	
-/*	public void tick() {
-		
-	}   */
-	
 	public void draw(Graphics g) {
 		for (Piece piece : pieces) {
 			piece.draw(g);
@@ -22,11 +18,11 @@ public class FreePieces {
 	}
 	
 	public void addPiece(Piece piece) {
-		this.pieces.add(piece);
+		pieces.add(piece);
 	}
 	
 	public void removePiece(Piece piece) {
-		this.pieces.remove(piece); 
+		pieces.remove(piece); 
 	}
 	
 /*	public Piece getPiece (int x, int y) {
@@ -50,8 +46,8 @@ public class FreePieces {
 				int px = piece.getX();
 				int py = piece.getY();
 				int ce = coordError(piece);
-				int pl = Piece.pieceLength(piece);
-				if (MouseInput.inBounds(mx, my, px + ce, py + ce, pl, pl)) {
+				int ps = Piece.pieceSize(piece);
+				if (MouseInput.inBounds(mx, my, px + ce, py + ce, ps, ps)) {
 					piece.setX(1275);
 					piece.setY(175);
 					platform.addPiece(piece);

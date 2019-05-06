@@ -1,7 +1,7 @@
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable{

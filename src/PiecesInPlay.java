@@ -21,11 +21,11 @@ public class PiecesInPlay {
 	}
 	
 	public void addPiece(Piece piece) {
-		this.pieces.add(piece);
+		pieces.add(piece);
 	}
 	
 	public void removePiece(Piece piece) {
-		this.pieces.remove(piece);
+		pieces.remove(piece);
 	}
 	
 

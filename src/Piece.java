@@ -61,7 +61,6 @@ public class Piece {
 		// big loop = g.drawOval(Aijx + 50, Aijy + 50, 50, 50)
 		// small loop = g.drawOval(Aijx + 60, Aijy + 60, 30, 30)	
 	
-	
 	public void draw(Graphics g) {
 		
 		if (color == COLOR.black) g.setColor(Color.black);
@@ -105,7 +104,7 @@ public class Piece {
 		} 
 	} 
 	
-	public static int pieceLength (Piece p) {
+	public static int pieceSize (Piece p) {
 		if (p.size == Piece.SIZE.big) return 100;
 		else return 70;
 	}
