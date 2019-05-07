@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.LinkedList;
 
 public class Tile {
 	
@@ -13,13 +14,14 @@ public class Tile {
 	protected STATE state;
 	private Platform platform;
 	private PiecesInPlay piecesInPlay;
+	LinkedList<Piece> onTile = new LinkedList<Piece>();
 	
-	public Tile(int x, int y, STATE state, Platform platform, PiecesInPlay piecesInPlay) {
+	public Tile(int x, int y, STATE state, Platform platform, LinkedList<Piece> onTile) {
 		this.x = x; 
 		this.y = y; 
 		this.state = state;
 		this.platform = platform;
-		this.piecesInPlay = piecesInPlay;
+		this.onTile = onTile;
 	}
 	
 	public int getX() {
@@ -29,10 +31,17 @@ public class Tile {
 	public int getY() {
 		return this.y;
 	}
+	
+	public Piece getPiece(){
+		return this.onTile.get(0);
+	}
 
 	public void draw(Graphics g) {
 		g.setColor(Color.yellow);
 		g.drawOval(x, y, 150, 150);
+		if (this.state == STATE.taken) {
+			this.getPiece().draw(g);
+		}
 		
 	}
 	
@@ -44,7 +53,7 @@ public class Tile {
 		Piece beingPlayed = platform.getPiece();
 		beingPlayed.setX(this.getX()); 
 		beingPlayed.setY(this.getY());
-		piecesInPlay.addPiece(beingPlayed);
+		this.onTile.add(beingPlayed);
 		this.state = STATE.taken;
 	} 
 

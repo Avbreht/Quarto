@@ -14,10 +14,13 @@ public class Platform {
 			piece.draw(g);
 		}
 		
+		Font custom = new Font("arial", 1, 30);
+		Font custom2 = new Font("arial", 1, 50);
+		g.setFont(custom);
+		
 		if (Game.gameState == Game.STATE.P1_Choose) {
 
-			Font custom = new Font("arial", 1, 30);
-			g.setFont(custom);
+			
 			g.setColor(Color.WHITE);
 			g.drawString("Player 1, choose a piece", 1180, 70);
 			
@@ -25,8 +28,6 @@ public class Platform {
 		
 		else if (Game.gameState == Game.STATE.P2_Choose) {
 
-			Font custom  = new Font("arial", 1, 30);
-			g.setFont(custom);
 			g.setColor(Color.WHITE);
 			g.drawString("Player 2, choose a piece", 1180, 70);
 			
@@ -34,8 +35,6 @@ public class Platform {
 		
 		else if (Game.gameState == Game.STATE.P1_Placement) {
 
-			Font custom = new Font("arial", 1, 30);
-			g.setFont(custom);
 			g.setColor(Color.WHITE);
 			g.drawString("Player 1, place your piece", 1170, 70);
 			
@@ -43,12 +42,36 @@ public class Platform {
 		
 		else if (Game.gameState == Game.STATE.P2_Placement) {
 
-			Font custom = new Font("arial", 1, 30);
-			g.setFont(custom);
 			g.setColor(Color.WHITE);
 			g.drawString("Player 2, place your piece", 1170, 70);
 			
 		} 
+		
+		else if (Game.gameState == Game.STATE.P1_Wins) {
+			
+			g.setFont(custom2);
+			g.setColor(Color.WHITE);
+			g.drawString("Player 1 wins!", 1180, 150);
+			
+			g.setFont(custom);
+			g.setColor(Color.WHITE);
+			g.drawRect(1275, 265, 150, 50);
+			g.drawString("Replay", 1300, 300);
+		
+		}
+		
+		else if (Game.gameState == Game.STATE.P2_Wins) {
+			
+			g.setFont(custom2);
+			g.setColor(Color.WHITE);
+			g.drawString("Player 2 wins!", 1180, 150);
+			
+			g.setFont(custom);
+			g.setColor(Color.WHITE);
+			g.drawRect(1275, 265, 150, 50);
+			g.drawString("Replay", 1300, 300);
+			
+		}
 		
 	}
 	

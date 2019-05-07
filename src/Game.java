@@ -1,8 +1,8 @@
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.LinkedList;
 
 public class Game extends Canvas implements Runnable{
 
@@ -13,22 +13,10 @@ public class Game extends Canvas implements Runnable{
 	
 	private Thread thread; 
 	private boolean running = false; 
-	
+
+	private Platform platform;
 	private TileArray tiles; 
 	private FreePieces freePieces; 
-	private PiecesInPlay piecesInPlay;
-	private Platform platform;
-//	private MouseInput mouse; 
-	
-	// tile coordinates:
-	private int A00x = 475, A00y = 50,  A01x = 595, A01y = 170, A02x = 715, A02y = 290, A03x = 835, A03y = 410;
-	private int A10x = 355, A10y = 170, A11x = 475, A11y = 290, A12x = 595, A12y = 410, A13x = 715, A13y = 530;
-	private int A20x = 235, A20y = 290, A21x = 355, A21y = 410, A22x = 475, A22y = 530, A23x = 595, A23y = 650;
-	private int A30x = 115, A30y = 410, A31x = 235, A31y = 530, A32x = 355, A32y = 650, A33x = 475, A33y = 770;
-	
-	// free pieces coordinates:
-	public int c1 = 805, c2 = 665, c3 = 540, c4 = 430;
-	public int r1 = 1095, r2 = 1215, r3 = 1335, r4 = 1455; 
 	
 	// background:
 	private final Color boardColor = new Color(100, 30, 0);
@@ -51,50 +39,18 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 		
 		platform = new Platform(); 
-		piecesInPlay = new PiecesInPlay();
 		tiles = new TileArray(platform);
 		freePieces = new FreePieces(platform);
 		
 		new Window (width, height, "Quarto", this);
+	
+		this.addMouseListener(new MouseInput(this, freePieces, platform, tiles)); 
 		
-	//	mouse = new MouseInput();
-		this.addMouseListener(new MouseInput(freePieces, platform, tiles)); 
+		// initial state of the tiles:
+		tiles.initialize();
 		
-		// Initial state of the tiles:
-		tiles.addTile(0, 0, new Tile(A00x, A00y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(0, 1, new Tile(A01x, A01y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(0, 2, new Tile(A02x, A02y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(0, 3, new Tile(A03x, A03y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(1, 0, new Tile(A10x, A10y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(1, 1, new Tile(A11x, A11y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(1, 2, new Tile(A12x, A12y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(1, 3, new Tile(A13x, A13y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(2, 0, new Tile(A20x, A20y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(2, 1, new Tile(A21x, A21y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(2, 2, new Tile(A22x, A22y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(2, 3, new Tile(A23x, A23y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(3, 0, new Tile(A30x, A30y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(3, 1, new Tile(A31x, A31y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(3, 2, new Tile(A32x, A32y, Tile.STATE.empty, platform, piecesInPlay));
-		tiles.addTile(3, 3, new Tile(A33x, A33y, Tile.STATE.empty, platform, piecesInPlay));
-		
-		// Initial state of the game pieces:
-		freePieces.addPiece(new Piece(r1, c1, Piece.SIZE.big, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.without));
-		freePieces.addPiece(new Piece(r2, c1, Piece.SIZE.big, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.with));
-		freePieces.addPiece(new Piece(r3, c1, Piece.SIZE.big, Piece.COLOR.black, Piece.SHAPE.square, Piece.LOOP.without));
-		freePieces.addPiece(new Piece(r4, c1, Piece.SIZE.big, Piece.COLOR.black, Piece.SHAPE.square, Piece.LOOP.with));
-		freePieces.addPiece(new Piece(r1, c2, Piece.SIZE.big, Piece.COLOR.white, Piece.SHAPE.circle, Piece.LOOP.without));
-		freePieces.addPiece(new Piece(r2, c2, Piece.SIZE.big, Piece.COLOR.white, Piece.SHAPE.circle, Piece.LOOP.with));
-		freePieces.addPiece(new Piece(r3, c2, Piece.SIZE.big, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.without));
-		freePieces.addPiece(new Piece(r4, c2, Piece.SIZE.big, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.with));
-		freePieces.addPiece(new Piece(r1, c3, Piece.SIZE.small, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.without));
-		freePieces.addPiece(new Piece(r2, c3, Piece.SIZE.small, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.with));
-		freePieces.addPiece(new Piece(r3, c3, Piece.SIZE.small, Piece.COLOR.black, Piece.SHAPE.square, Piece.LOOP.without));
-		freePieces.addPiece(new Piece(r4, c3, Piece.SIZE.small, Piece.COLOR.black, Piece.SHAPE.square, Piece.LOOP.with));
-		freePieces.addPiece(new Piece(r1, c4, Piece.SIZE.small, Piece.COLOR.white, Piece.SHAPE.circle, Piece.LOOP.without));
-		freePieces.addPiece(new Piece(r2, c4, Piece.SIZE.small, Piece.COLOR.white, Piece.SHAPE.circle, Piece.LOOP.with));
-		freePieces.addPiece(new Piece(r3, c4, Piece.SIZE.small, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.without));
-		freePieces.addPiece(new Piece(r4, c4, Piece.SIZE.small, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.with));
+		// initial state of the game pieces:
+		freePieces.initialize();
 		
 	}
 
@@ -112,6 +68,14 @@ public class Game extends Canvas implements Runnable{
 		catch (Exception e) {
 			e.printStackTrace(); 
 		}
+	}
+	
+	public void restart() {
+		gameState = STATE.P1_Choose;
+		tiles.clear();
+		freePieces.clear();
+		tiles.initialize();
+		freePieces.initialize();
 	}
 	
 		// game loop: 
@@ -136,7 +100,8 @@ public class Game extends Canvas implements Runnable{
 		}
 
 	private void tick() {
-	//	freePieces.tick();
+		tiles.tick();
+		if (gameState == STATE.P1_Wins || gameState == STATE.P2_Wins) this.freePieces.clear();
 	}
 		
 	private void draw() {
@@ -160,8 +125,6 @@ public class Game extends Canvas implements Runnable{
 		platform.draw(g);
 		// Draw the free pieces:
 		freePieces.draw(g);
-		// Draw the pieces in play:
-		piecesInPlay.draw(g);
 		
 		g.dispose();
 		bs.show();

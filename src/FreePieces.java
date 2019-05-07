@@ -4,6 +4,10 @@ import java.util.LinkedList;
 
 public class FreePieces {
 	
+	// free pieces coordinates:
+	public int c1 = 805, c2 = 665, c3 = 540, c4 = 430;
+	public int r1 = 1095, r2 = 1215, r3 = 1335, r4 = 1455; 
+	
 	LinkedList<Piece> pieces = new LinkedList<Piece>();
 	private Platform platform; 
 	
@@ -25,13 +29,9 @@ public class FreePieces {
 		pieces.remove(piece); 
 	}
 	
-/*	public Piece getPiece (int x, int y) {
-		for (Piece piece : pieces) {
-			if (piece.x == x && piece.y == y) {
-				return piece; 
-			}
-		}
-	}  */
+	public void clear() {
+		pieces = new LinkedList<Piece>();
+	}
 	
 	public int coordError (Piece p) {
 		if (p.size == Piece.SIZE.big) return 25;
@@ -57,6 +57,25 @@ public class FreePieces {
 				else auxiliary.add(piece);
 			}
 			this.pieces = auxiliary; 	
+	}
+	
+	public void initialize() {
+		this.addPiece(new Piece(r1, c1, Piece.SIZE.big, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.without));
+		this.addPiece(new Piece(r2, c1, Piece.SIZE.big, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.with));
+		this.addPiece(new Piece(r3, c1, Piece.SIZE.big, Piece.COLOR.black, Piece.SHAPE.square, Piece.LOOP.without));
+		this.addPiece(new Piece(r4, c1, Piece.SIZE.big, Piece.COLOR.black, Piece.SHAPE.square, Piece.LOOP.with));
+		this.addPiece(new Piece(r1, c2, Piece.SIZE.big, Piece.COLOR.white, Piece.SHAPE.circle, Piece.LOOP.without));
+		this.addPiece(new Piece(r2, c2, Piece.SIZE.big, Piece.COLOR.white, Piece.SHAPE.circle, Piece.LOOP.with));
+		this.addPiece(new Piece(r3, c2, Piece.SIZE.big, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.without));
+		this.addPiece(new Piece(r4, c2, Piece.SIZE.big, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.with));
+		this.addPiece(new Piece(r1, c3, Piece.SIZE.small, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.without));
+		this.addPiece(new Piece(r2, c3, Piece.SIZE.small, Piece.COLOR.white, Piece.SHAPE.square, Piece.LOOP.with));
+		this.addPiece(new Piece(r3, c3, Piece.SIZE.small, Piece.COLOR.black, Piece.SHAPE.square, Piece.LOOP.without));
+		this.addPiece(new Piece(r4, c3, Piece.SIZE.small, Piece.COLOR.black, Piece.SHAPE.square, Piece.LOOP.with));
+		this.addPiece(new Piece(r1, c4, Piece.SIZE.small, Piece.COLOR.white, Piece.SHAPE.circle, Piece.LOOP.without));
+		this.addPiece(new Piece(r2, c4, Piece.SIZE.small, Piece.COLOR.white, Piece.SHAPE.circle, Piece.LOOP.with));
+		this.addPiece(new Piece(r3, c4, Piece.SIZE.small, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.without));
+		this.addPiece(new Piece(r4, c4, Piece.SIZE.small, Piece.COLOR.black, Piece.SHAPE.circle, Piece.LOOP.with));
 	}
 }
 

@@ -108,6 +108,7 @@ public class Piece {
 		if (p.size == Piece.SIZE.big) return 100;
 		else return 70;
 	}
+	
 }
 
 
