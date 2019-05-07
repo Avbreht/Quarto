@@ -26,8 +26,6 @@ public class Piece {
 	protected SHAPE shape; 
 	protected LOOP loop;  
 	
-	private final Color boardColor = new Color(100, 30, 0);
-	
 	public Piece (int x, int y, SIZE size, COLOR color, 
 			SHAPE shape, LOOP loop) {
 		this.x = x; 
@@ -54,12 +52,14 @@ public class Piece {
 		this.y = y;
 	}
 	
-		// (big, square) = g.drawRect(Aijx + 25, Aijy + 25, 100, 100)
-		// (big, round) = g.drawOval(Aijx + 25, Aijy + 25, 100, 100)
-		// (small, square) = g.drawRect(Aijx + 40, Aijy + 40, 70, 70)
-		// (small, round) = g.drawOval(Aijx + 40, Aijy + 40, 70, 70)
-		// big loop = g.drawOval(Aijx + 50, Aijy + 50, 50, 50)
-		// small loop = g.drawOval(Aijx + 60, Aijy + 60, 30, 30)	
+		/* formula for drawing different types of game pieces:
+		 (big, square) = g.drawRect(Aijx + 25, Aijy + 25, 100, 100)
+		 (big, round) = g.drawOval(Aijx + 25, Aijy + 25, 100, 100)
+		 (small, square) = g.drawRect(Aijx + 40, Aijy + 40, 70, 70)
+		 (small, round) = g.drawOval(Aijx + 40, Aijy + 40, 70, 70)
+		 big loop = g.drawOval(Aijx + 50, Aijy + 50, 50, 50)
+		 small loop = g.drawOval(Aijx + 60, Aijy + 60, 30, 30)	
+		 */
 	
 	public void draw(Graphics g) {
 		
@@ -83,22 +83,22 @@ public class Piece {
 		// with loop:
 		else if (size == SIZE.small && shape == SHAPE.square && loop == LOOP.with) {
 			g.fillRect(this.x + 40, this.y + 40, 70, 70);
-	 		g.setColor(boardColor);
+	 		g.setColor(Game.boardColor);
 	 		g.fillOval(this.x + 60, this.y + 60, 30, 30);
 		}
 		else if (size == SIZE.small && shape == SHAPE.circle && loop == LOOP.with) {
 			g.fillOval(this.x + 40, this.y + 40, 70, 70);
-			g.setColor(boardColor);
+			g.setColor(Game.boardColor);
 			g.fillOval(this.x + 60, this.y + 60, 30, 30);
 		}
 		else if (size == SIZE.big && shape == SHAPE.square && loop == LOOP.with) {
 			g.fillRect(this.x + 25, this.y + 25, 100, 100);
-			g.setColor(boardColor);
+			g.setColor(Game.boardColor);
 			g.fillOval(this.x + 50, this.y + 50, 50, 50);
 		}
 		else if (size == SIZE.big && shape == SHAPE.circle && loop == LOOP.with) {
 			g.fillOval(this.x + 25, this.y + 25, 100, 100);
-			g.setColor(boardColor);
+			g.setColor(Game.boardColor);
 			g.fillOval(this.x + 50, this.y + 50, 50, 50);
 		
 		} 

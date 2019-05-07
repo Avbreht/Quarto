@@ -13,7 +13,6 @@ public class Tile {
 	protected int x, y; 
 	protected STATE state;
 	private Platform platform;
-	private PiecesInPlay piecesInPlay;
 	LinkedList<Piece> onTile = new LinkedList<Piece>();
 	
 	public Tile(int x, int y, STATE state, Platform platform, LinkedList<Piece> onTile) {
@@ -45,10 +44,7 @@ public class Tile {
 		
 	}
 	
-	public boolean clicked(int mx, int my) {
-		return MouseInput.inBounds(mx, my, this.x, this.y, 150, 150);
-	}
-	
+	// place the piece on the platform on the tile: 
 	public void place () {
 		Piece beingPlayed = platform.getPiece();
 		beingPlayed.setX(this.getX()); 
@@ -56,18 +52,6 @@ public class Tile {
 		this.onTile.add(beingPlayed);
 		this.state = STATE.taken;
 	} 
-
-	
-	/* Change the constructor of the tile so that it also has an initially empty list
-	 * in which the piece placed on the tile is added.
-	 * Then make a method to get the piece saved in that list.
-	 * Add the piece in the list with the place() method.
-	 * In the TileArray class make the draw() method also look at the 
-	 * individual lists of the tiles.
-	 * If it contains a game piece the method should also draw the piece.
-	 * With this the PiecesInPlay class could become redundant */
-	
-	
 	
 }
 

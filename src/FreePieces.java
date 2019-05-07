@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class FreePieces {
 	
-	// free pieces coordinates:
+	// coordinates of the free pieces:
 	public int c1 = 805, c2 = 665, c3 = 540, c4 = 430;
 	public int r1 = 1095, r2 = 1215, r3 = 1335, r4 = 1455; 
 	
@@ -45,7 +45,7 @@ public class FreePieces {
 			for (Piece piece : pieces) {
 				int px = piece.getX();
 				int py = piece.getY();
-				int ce = coordError(piece);
+				int ce = coordError(piece);   // to get the right coordinates for the rectangle
 				int ps = Piece.pieceSize(piece);
 				if (MouseInput.inBounds(mx, my, px + ce, py + ce, ps, ps)) {
 					piece.setX(1275);

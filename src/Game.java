@@ -2,7 +2,6 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.LinkedList;
 
 public class Game extends Canvas implements Runnable{
 
@@ -19,7 +18,7 @@ public class Game extends Canvas implements Runnable{
 	private FreePieces freePieces; 
 	
 	// background:
-	private final Color boardColor = new Color(100, 30, 0);
+	public static Color boardColor = new Color(100, 30, 0);
 	
 	public enum STATE{
 		P1_Choose,
@@ -28,10 +27,6 @@ public class Game extends Canvas implements Runnable{
 		P2_Placement,
 		P1_Wins,
 		P2_Wins; 
-	}
-	
-	public Color getBoardColor () {
- 		return this.boardColor; 
 	}
 	
 	public static STATE gameState = STATE.P1_Choose;
@@ -99,6 +94,7 @@ public class Game extends Canvas implements Runnable{
 			stop(); 
 		}
 
+	// update the game as we make changes:
 	private void tick() {
 		tiles.tick();
 		if (gameState == STATE.P1_Wins || gameState == STATE.P2_Wins) this.freePieces.clear();
@@ -117,12 +113,16 @@ public class Game extends Canvas implements Runnable{
 		g.fillRect(0, 0, width, height);
 		g.setColor(Color.yellow);
 		g.drawOval(110, 45, 880, 880);
+		
 		// Separate the tiles from the side bar: 
-		g.drawLine(1100, 1000, 1100, 0);		
-		//Draw the tiles:
-		tiles.draw(g);
+		g.drawLine(1100, 1000, 1100, 0);	
+		
 		// Draw the piece to be placed: 
 		platform.draw(g);
+		
+		//Draw the tiles:
+		tiles.draw(g);
+		
 		// Draw the free pieces:
 		freePieces.draw(g);
 		

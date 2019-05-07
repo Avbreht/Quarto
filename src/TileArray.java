@@ -140,37 +140,37 @@ public class TileArray {
 	public void tick() {
 		if (Game.gameState == Game.STATE.P1_Choose || Game.gameState == Game.STATE.P2_Choose) {
 			
-			Tile tile11 = tiles[0][0];
-			Tile tile22 = tiles[1][1];
-			Tile tile33 = tiles[2][2];
-			Tile tile44 = tiles[3][3];
+			Tile tile00 = tiles[0][0];
+			Tile tile11 = tiles[1][1];
+			Tile tile22 = tiles[2][2];
+			Tile tile33 = tiles[3][3];
 		
-			this.checkTiles(tile11, tile22, tile33, tile44);
+			this.checkTiles(tile00, tile11, tile22, tile33);
 			
-			Tile tile14 = tiles[0][3];
-			Tile tile23 = tiles[1][2];
-			Tile tile32 = tiles[2][1];
-			Tile tile41 = tiles[3][0];
+			Tile tile03 = tiles[0][3];
+			Tile tile12 = tiles[1][2];
+			Tile tile21 = tiles[2][1];
+			Tile tile30 = tiles[3][0];
 		
-			this.checkTiles(tile14, tile23, tile32, tile41);
+			this.checkTiles(tile03, tile12, tile21, tile30);
 			
 			for (int i = 0; i < 4; i++) {
-				Tile tilei1 = tiles[i][0];
-				Tile tilei2 = tiles[i][1];
-				Tile tilei3 = tiles[i][2];
-				Tile tilei4 = tiles[i][3];
+				Tile tile_i0 = tiles[i][0];
+				Tile tile_i1 = tiles[i][1];
+				Tile tile_i2 = tiles[i][2];
+				Tile tile_i3 = tiles[i][3];
 			
-				this.checkTiles(tilei1, tilei2, tilei3, tilei4);
+				this.checkTiles(tile_i0, tile_i1, tile_i2, tile_i3);
 		
 			}
 			
 			for (int i = 0; i < 4; i++) {
-				Tile tile1i = tiles[0][i];
-				Tile tile2i = tiles[1][i];
-				Tile tile3i = tiles[2][i];
-				Tile tile4i = tiles[3][i];
+				Tile tile_0i = tiles[0][i];
+				Tile tile_1i = tiles[1][i];
+				Tile tile_2i = tiles[2][i];
+				Tile tile_3i = tiles[3][i];
 			
-				this.checkTiles(tile1i, tile2i, tile3i, tile4i);
+				this.checkTiles(tile_0i, tile_1i, tile_2i, tile_3i);
 		
 			}
 		
@@ -183,7 +183,24 @@ public class TileArray {
 	}
 	
 	public void initialize() {
-		// Initial state of the tiles:
+		
+		tile00 = new LinkedList<Piece>(); 
+		tile01 = new LinkedList<Piece>(); 
+		tile02 = new LinkedList<Piece>(); 
+		tile03 = new LinkedList<Piece>(); 
+		tile10 = new LinkedList<Piece>(); 
+		tile11 = new LinkedList<Piece>(); 
+		tile12 = new LinkedList<Piece>(); 
+		tile13 = new LinkedList<Piece>(); 
+		tile20 = new LinkedList<Piece>(); 
+		tile21 = new LinkedList<Piece>(); 
+		tile22 = new LinkedList<Piece>(); 
+		tile23 = new LinkedList<Piece>();
+		tile30 = new LinkedList<Piece>(); 
+		tile31 = new LinkedList<Piece>(); 
+		tile32 = new LinkedList<Piece>(); 
+		tile33 = new LinkedList<Piece>();  
+		
 		this.addTile(0, 0, new Tile(A00x, A00y, Tile.STATE.empty, platform, tile00));
 		this.addTile(0, 1, new Tile(A01x, A01y, Tile.STATE.empty, platform, tile01));
 		this.addTile(0, 2, new Tile(A02x, A02y, Tile.STATE.empty, platform, tile02));
